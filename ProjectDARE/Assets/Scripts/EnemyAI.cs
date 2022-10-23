@@ -45,5 +45,11 @@ public class EnemyAI : MonoBehaviour
                 _time -= attack_interval;
             }
         }
+        if (other.gameObject.tag == "Bullet")
+        {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0;
+        }
+
     }
 }

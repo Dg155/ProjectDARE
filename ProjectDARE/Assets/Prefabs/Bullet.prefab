@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1529840399749733015}
-  bulletDamage: 20
+  bulletDamage: 10

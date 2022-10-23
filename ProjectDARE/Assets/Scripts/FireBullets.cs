@@ -14,14 +14,7 @@ public class FireBullets : MonoBehaviour
     [SerializeField] private float fireRate = 0.5f;
     private float elapsedCooldown = 0f;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -51,7 +44,7 @@ public class FireBullets : MonoBehaviour
         // delete the bullets after 3 seconds if they have not collided with anything
         for (int i = 0; i < bulletCount; ++i)
         {
-            Destroy(bullets[i], 3);
+            Destroy(bullets[i], 1.5f);
         }
     }
 }

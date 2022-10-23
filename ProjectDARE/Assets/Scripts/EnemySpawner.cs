@@ -8,28 +8,23 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject candy;
     [SerializeField] private GameObject enemy;
-    [SerializeField] private float spawnRadius = 7f;
-    [SerializeField] private float totalEnemies = 10f;
-    [SerializeField] private float spawnInterval = 2.5f;
+    [SerializeField] private GameController gameController;
 
-    
-    void Start()
+    public async Task<bool> SpawnEnemy(float spawnRadius, int totalEnemies, float spawnIntervalmin, float spawnIntervalmax)
     {
-        SpawnEnemy();
-    }
-
-
-    async void SpawnEnemy()
-    {
+        float spawnInterval;
+        Vector2 spawnPosition = candy.transform.position; 
         for (int i = 0; i < totalEnemies; ++i)
         {
-            Vector2 spawnPosition = candy.transform.position; 
             spawnPosition += Random.insideUnitCircle.normalized * spawnRadius;
             Instantiate(enemy, spawnPosition, Quaternion.identity);
             Debug.LogFormat("Spawned enemy at time {0}", Time.time);
+            gameController.addToEnemies(1);
+            spawnInterval = Random.Range(spawnIntervalmin, spawnIntervalmax);
             await Task.Delay((int)(spawnInterval * 1000));
         }
         Debug.LogFormat("Finished spawning enemies at {0}", Time.time);
+        return true;
     }
 
 }

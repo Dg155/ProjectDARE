@@ -8,6 +8,7 @@ public class CandyHealth : Health
     [SerializeField] private Sprite oneCandyEaten;
     [SerializeField] private Sprite twoCandyEaten;
     [SerializeField] private Sprite threeCandyEaten;
+    [SerializeField] private GameObject EndScreen;
 
     public override void TakeDamage(int damageTaken)
     {
@@ -26,6 +27,7 @@ public class CandyHealth : Health
     }
 
     protected override void Die(){
-        Debug.Log("Game Over!");
+        Time.timeScale = 0;
+        EndScreen.SetActive(true);
     }
 }

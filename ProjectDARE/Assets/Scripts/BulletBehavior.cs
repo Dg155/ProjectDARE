@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet;
-    [SerializeField] private int bulletDamage = 50;
+    public int bulletDamage = 50;
 
     private void OnCollisionStay2D(Collision2D other)
     {

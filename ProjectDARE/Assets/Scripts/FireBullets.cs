@@ -13,13 +13,15 @@ public class FireBullets : MonoBehaviour
     [SerializeField] private float bulletSpread = 0.1f;
     [SerializeField] private float fireRate = 0.5f;
     private float elapsedCooldown = 0f;
+    public int extraDamage = 0;
+    public float decreasedFireRate = 0f;
 
     
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (Time.time - elapsedCooldown >= fireRate || elapsedCooldown == 0f)
+            if (Time.time - elapsedCooldown >= fireRate - decreasedFireRate|| elapsedCooldown == 0f)
             {
                 Shoot();
                 elapsedCooldown = Time.time;
@@ -36,6 +38,8 @@ public class FireBullets : MonoBehaviour
             bulletRotation.x += Random.Range(-bulletSpread, bulletSpread);
             bulletRotation.y += Random.Range(-bulletSpread, bulletSpread);
             GameObject BulletInstance = Instantiate(bullet, shootingPoint.position, bulletRotation);
+            // For when the extra damage ability is picked
+            BulletInstance.GetComponent<BulletBehavior>().bulletDamage += extraDamage;
             BulletInstance.GetComponent<Rigidbody2D>().AddForce(BulletInstance.transform.right * bulletSpeed);
             bullets.Add(BulletInstance);
         }

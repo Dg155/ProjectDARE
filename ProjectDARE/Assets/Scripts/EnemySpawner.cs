@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject house;
+    [SerializeField] private GameObject candy;
     [SerializeField] private GameObject enemy;
     [SerializeField] private float spawnRadius = 7f;
     [SerializeField] private float totalEnemies = 10f;
@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < totalEnemies; ++i)
         {
-            Vector2 spawnPosition = house.transform.position; 
+            Vector2 spawnPosition = candy.transform.position; 
             spawnPosition += Random.insideUnitCircle.normalized * spawnRadius;
             Instantiate(enemy, spawnPosition, Quaternion.identity);
             Debug.LogFormat("Spawned enemy at time {0}", Time.time);

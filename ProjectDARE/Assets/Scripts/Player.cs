@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     // Update is called once per frame
@@ -44,12 +45,12 @@ public class Player : MonoBehaviour
     {
         if (facingRight)
         {
-            this.transform.localScale = new Vector3(-1,1,1);
+            this.transform.localScale = new Vector3(1,1,1);
             facingRight = false;
         }
         else
         {
-            this.transform.localScale = new Vector3(1,1,1);
+            this.transform.localScale = new Vector3(-1,1,1);
             facingRight = true;
         }
     }

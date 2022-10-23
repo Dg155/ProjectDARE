@@ -9,10 +9,16 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed = 3;
     [SerializeField] private float attack_interval = 1f;
     [SerializeField] private int damageDone = 50;
+    [SerializeField] private AudioClip attackHouseSFX;
+    [SerializeField] private AudioClip attackCandySFX;
+    Rigidbody2D rb;
     private float _time;
 
     private void Start() {
         _time = attack_interval;
+        rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        target = GameObject.FindWithTag("Candy");
     }
 
     void Update()
@@ -26,6 +32,7 @@ public class EnemyAI : MonoBehaviour
             _time += Time.deltaTime;
             while(_time >= attack_interval) {
                 other.gameObject.GetComponent<Health>().TakeDamage(damageDone);
+                GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(attackHouseSFX);
                 _time -= attack_interval;
             }
         }
@@ -34,6 +41,7 @@ public class EnemyAI : MonoBehaviour
             _time += Time.deltaTime;
             while(_time >= attack_interval) {
                 other.gameObject.GetComponent<Health>().TakeDamage(1);
+                GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(attackCandySFX);
                 _time -= attack_interval;
             }
         }

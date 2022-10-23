@@ -11,8 +11,15 @@ public class BulletBehavior : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Health>() != null)   // has a health script if true
         {
-            other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
+            if (other.gameObject.tag != "Wall")
+            {
+                other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
+            }
         }
-        Destroy(Bullet);
+
+        if (other.gameObject.tag != "Bullet")
+        {
+            Destroy(Bullet);
+        }
     }
 }

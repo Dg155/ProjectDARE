@@ -8,6 +8,7 @@ TagManager:
   - SFXPlayer
   - Wall
   - Candy
+  - Bullet
   layers:
   - Default
   - TransparentFX

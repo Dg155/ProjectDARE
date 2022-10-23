@@ -9,6 +9,8 @@ public class FireBullets : MonoBehaviour
     [SerializeField] private Animator gunAnimator;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 1000f;
+    [SerializeField] private float bulletCount = 5f;
+    [SerializeField] private float bulletSpread = 0.1f;
     [SerializeField] private float fireRate = 0.5f;
     private float elapsedCooldown = 0f;
 
@@ -34,9 +36,22 @@ public class FireBullets : MonoBehaviour
 
     void Shoot()
     {
-        GameObject BulletInstance = Instantiate(bullet, shootingPoint.position, shootingPoint.rotation);
-        BulletInstance.GetComponent<Rigidbody2D>().AddForce(BulletInstance.transform.right * bulletSpeed);
+        List<GameObject> bullets = new List<GameObject>();
+        for (int i = 0; i < bulletCount; ++i)
+        {
+            Quaternion bulletRotation = shootingPoint.rotation;
+            bulletRotation.x += Random.Range(-bulletSpread, bulletSpread);
+            bulletRotation.y += Random.Range(-bulletSpread, bulletSpread);
+            GameObject BulletInstance = Instantiate(bullet, shootingPoint.position, bulletRotation);
+            BulletInstance.GetComponent<Rigidbody2D>().AddForce(BulletInstance.transform.right * bulletSpeed);
+            bullets.Add(BulletInstance);
+        }
         gunAnimator.SetTrigger("Shoot");
-        Destroy(BulletInstance, 3);
+        
+        // delete the bullets after 3 seconds if they have not collided with anything
+        for (int i = 0; i < bulletCount; ++i)
+        {
+            Destroy(bullets[i], 3);
+        }
     }
 }

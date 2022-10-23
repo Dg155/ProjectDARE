@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _isAlive = false;
-            if (_printToConsole is true) {Debug.LogFormat("{0} died", gameObject.tag);}
+            Die();
         }
     }
 
@@ -61,5 +61,7 @@ public class Health : MonoBehaviour
     {
         return _isAlive;
     }
+
+    protected virtual void Die(){}
 
 }

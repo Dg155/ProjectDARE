@@ -36,11 +36,11 @@ public class Shooter : MonoBehaviour
 
     private void flip(){
         if (facingRight){
-            this.transform.localScale = new Vector3(-1,-1,1);
+            this.transform.localScale = new Vector3(1,-1,1);
             facingRight = false;
         }
         else{
-            this.transform.localScale = new Vector3(1,1,1);
+            this.transform.localScale = new Vector3(-1,1,1);
             facingRight = true;
         }
     }

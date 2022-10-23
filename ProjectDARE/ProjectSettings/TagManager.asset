@@ -9,6 +9,8 @@ TagManager:
   - Wall
   - Candy
   - Bullet
+  - PopUpText
+  - CutSceneUI
   layers:
   - Default
   - TransparentFX

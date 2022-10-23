@@ -62,6 +62,12 @@ public class Health : MonoBehaviour
         return _isAlive;
     }
 
+    public void AddExtraHealth()
+    {
+        _maxHealth += 25;
+        _currentHealth += 25;
+    }
+
     protected virtual void Die(){}
 
 }

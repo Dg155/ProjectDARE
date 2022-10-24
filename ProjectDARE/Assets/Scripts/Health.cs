@@ -62,10 +62,10 @@ public class Health : MonoBehaviour
         return _isAlive;
     }
 
-    public void AddExtraHealth()
+    public void AddExtraHealth(int healthToAdd)
     {
-        _maxHealth += 25;
-        _currentHealth += 25;
+        _maxHealth += healthToAdd;
+        _currentHealth += healthToAdd;
     }
 
     protected virtual void Die(){}

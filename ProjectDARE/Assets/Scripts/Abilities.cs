@@ -5,18 +5,21 @@ using UnityEngine;
 public class Abilities : MonoBehaviour
 {
     [SerializeField] private GameObject shootingPoint;
+    [SerializeField] private AudioClip abilitySelectedSFX;
     [SerializeField] private List<GameObject> walls;
 
     // Adds 5 damage to each bullet, giving a total extra 25 damage
     public void SelectExtraDamage()
     {
         shootingPoint.GetComponent<FireBullets>().extraDamage += 5;
+        GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(abilitySelectedSFX);
     }
 
     // Decrease fire rate by 0.1 seconds
     public void SelectDecreaseFireRate()
     {
         shootingPoint.GetComponent<FireBullets>().decreasedFireRate -= 0.1f;
+        GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(abilitySelectedSFX);
     }
 
     // Give each wall an extra 25 health, effectively giving each wall one extra hit
@@ -25,6 +28,7 @@ public class Abilities : MonoBehaviour
         for (int i = 0; i < 4; ++i)
         {
             walls[i].GetComponent<Health>().AddExtraHealth(25);
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(abilitySelectedSFX);
         }
     }
 

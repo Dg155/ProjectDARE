@@ -49,8 +49,10 @@ MonoBehaviour:
   bullet: {fileID: 1529840399749733015, guid: fd49894f8999f524cb91696824bc9ff8, type: 3}
   bulletSpeed: 1000
   bulletCount: 5
-  bulletSpread: 0.5
+  bulletSpread: 0.25
   fireRate: 0.5
+  extraDamage: 0
+  decreasedFireRate: 0
 --- !u!1 &3392798472280841212
 GameObject:
   m_ObjectHideFlags: 0

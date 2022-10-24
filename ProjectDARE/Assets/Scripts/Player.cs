@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
+    Animator anim;
     float horizontal, vertical;
     protected bool facingRight;
     [SerializeField]
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+        if (horizontal == 0 && vertical == 0) {anim.SetBool("isWalking", false);}
+        else {anim.SetBool("isWalking", true);}
         rb.velocity = new Vector2(horizontal * playerSpeed, vertical * playerSpeed);
     }
 

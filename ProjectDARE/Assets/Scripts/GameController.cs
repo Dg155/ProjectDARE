@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameController : MonoBehaviour
     EnemySpawner enemySpawner;
     [SerializeField] private GameObject upgradeMenu;
     [SerializeField] private GameObject EndScreen;
+    [SerializeField] private TextMeshProUGUI roundText;
     private int amount_of_enemies = 0;
     private bool abilityChosen;
 
@@ -32,6 +34,7 @@ public class GameController : MonoBehaviour
         // Wave 1
         await enemySpawner.SpawnEnemy(7f, 3, 2f, 3f);
         while (amount_of_enemies > 0) {await Task.Yield();}
+        roundText.text = "Round 1 Complete! Choose upgrade for Round 2:";
         upgradeMenu.SetActive(true);
         while (!abilityChosen) {await Task.Yield();}
         abilityChosen = false;
@@ -40,6 +43,7 @@ public class GameController : MonoBehaviour
         // Wave 2
         await enemySpawner.SpawnEnemy(8f, 5, 1.5f, 2f);
         while (amount_of_enemies > 0) {await Task.Yield();}
+        roundText.text = "Round 2 Complete! Choose upgrade for Final Round:";
         upgradeMenu.SetActive(true);
         while (!abilityChosen) {await Task.Yield();}
         abilityChosen = false;

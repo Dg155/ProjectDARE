@@ -12,6 +12,5 @@ public class WallHealth : Health
         tempcolor.a = .5f;
         this.GetComponent<Tilemap>().color = tempcolor;
         gameObject.GetComponent<TilemapCollider2D>().enabled = false;
-        Debug.Log("Wall is destoryed!");
     }
 }

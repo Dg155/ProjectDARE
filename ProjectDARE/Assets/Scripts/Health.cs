@@ -30,7 +30,6 @@ public class Health : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            _isAlive = false;
             Die();
         }
     }

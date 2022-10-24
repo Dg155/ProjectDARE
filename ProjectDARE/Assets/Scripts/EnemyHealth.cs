@@ -5,7 +5,10 @@ using UnityEngine;
 public class EnemyHealth : Health
 {
     protected override void Die(){
-        GameObject.FindWithTag("GameManager").GetComponent<GameController>().addToEnemies(-1);
-        Destroy(gameObject);
+        if (_isAlive){
+            GameObject.FindWithTag("GameManager").GetComponent<GameController>().addToEnemies(-1);
+            Destroy(gameObject);
+        }
+        _isAlive = false;
     }
 }

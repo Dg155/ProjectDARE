@@ -16,14 +16,13 @@ public class EnemySpawner : MonoBehaviour
         Vector2 spawnPosition = candy.transform.position; 
         for (int i = 0; i < totalEnemies; ++i)
         {
-            spawnPosition += Random.insideUnitCircle.normalized * spawnRadius;
+            spawnPosition = candy.transform.position;
+            while (((spawnPosition.x > -5) && (spawnPosition.x < 4)) || ((spawnPosition.y > -4) && (spawnPosition.y < 5))) {spawnPosition = spawnPosition + (Random.insideUnitCircle.normalized * spawnRadius);}
             Instantiate(enemy, spawnPosition, Quaternion.identity);
-            Debug.LogFormat("Spawned enemy at time {0}", Time.time);
             gameController.addToEnemies(1);
             spawnInterval = Random.Range(spawnIntervalmin, spawnIntervalmax);
             await Task.Delay((int)(spawnInterval * 1000));
         }
-        Debug.LogFormat("Finished spawning enemies at {0}", Time.time);
         return true;
     }
 

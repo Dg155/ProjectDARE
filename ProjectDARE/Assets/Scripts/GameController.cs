@@ -24,16 +24,31 @@ public class GameController : MonoBehaviour
 
     async void StartGame()
     {
-        await enemySpawner.SpawnEnemy(7f, 10, 2f, 3f);
-        while (amount_of_enemies != 0) {await Task.Yield();}
+        // Wave 1
+        await enemySpawner.SpawnEnemy(7f, 3, 2f, 3f);
+        while (amount_of_enemies > 0) {await Task.Yield();}
         upgradeMenu.SetActive(true);
         while (!abilityChosen) {await Task.Yield();}
         abilityChosen = false;
         upgradeMenu.SetActive(false);
+
+        // Wave 2
+        await enemySpawner.SpawnEnemy(8f, 15, 1.5f, 2f);
+        while (amount_of_enemies > 0) {await Task.Yield();}
+        upgradeMenu.SetActive(true);
+        while (!abilityChosen) {await Task.Yield();}
+        abilityChosen = false;
+        upgradeMenu.SetActive(false);
+
+        // Final Wave
+        await enemySpawner.SpawnEnemy(9f, 20, 1f, 1.5f);
+        while (amount_of_enemies > 0) {await Task.Yield();}
+        GetComponent<SceneLoader>().LoadNextScene();
     }
 
     public void addToEnemies(int i){
         amount_of_enemies += i;
+        Debug.Log(amount_of_enemies);
     }
 
     public void buttonPressed(){

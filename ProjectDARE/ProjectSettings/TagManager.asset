@@ -13,6 +13,7 @@ TagManager:
   - CutSceneUI
   - UpgradeText
   - GameManager
+  - Enemy
   layers:
   - Default
   - TransparentFX

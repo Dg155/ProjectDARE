@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet;
+    [SerializeField] private AudioClip enemyTakeDamageSFX;
     public int bulletDamage = 20;
 
     private void OnCollisionStay2D(Collision2D other)
@@ -14,6 +15,7 @@ public class BulletBehavior : MonoBehaviour
             if (other.gameObject.tag == "Enemy")
             {
                 other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
+                GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(enemyTakeDamageSFX);
             }
         }
 

@@ -7,6 +7,7 @@ public class FireBullets : MonoBehaviour
     // fire rate variable is equal to the cooldown time in seconds between shots
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Animator gunAnimator;
+    [SerializeField] private AudioClip gunFireSFX;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 1000f;
     [SerializeField] private float bulletCount = 5f;
@@ -24,6 +25,7 @@ public class FireBullets : MonoBehaviour
             if (Time.time - elapsedCooldown >= fireRate - decreasedFireRate|| elapsedCooldown == 0f)
             {
                 Shoot();
+                GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(gunFireSFX);
                 elapsedCooldown = Time.time;
             }
         }

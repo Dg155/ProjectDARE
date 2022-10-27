@@ -728,6 +728,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: CutSceneUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1958129897730798914, guid: f44a47dbf3855ad40a4ee255bbcd2c1e, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 1958129897730798924, guid: f44a47dbf3855ad40a4ee255bbcd2c1e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -819,8 +823,12 @@ PrefabInstance:
     - target: {fileID: 5981797995335185728, guid: f44a47dbf3855ad40a4ee255bbcd2c1e, type: 3}
       propertyPath: fithMessage
       value: '"M-... m- m- MONSTERS!" screams John as he comes face to face with
-        one of the most abhorrent grueling creators he has ever seen. "GIVE US YOUR
-        CANDY.... WE WANT CANDY" they screeched.'
+        one of the most abhorrent grueling creatures  he has ever seen. "GIVE US
+        YOUR CANDY.... WE WANT CANDY" they screeched.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981797995335185728, guid: f44a47dbf3855ad40a4ee255bbcd2c1e, type: 3}
+      propertyPath: characterPopupDelay
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f44a47dbf3855ad40a4ee255bbcd2c1e, type: 3}

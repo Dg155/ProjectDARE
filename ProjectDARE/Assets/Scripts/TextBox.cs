@@ -10,9 +10,9 @@ public class TextBox : MonoBehaviour
 
     TextMeshProUGUI TM;
     SceneLoader SL;
-    public const string kalphaCode = "<color=#00000000>";
-    public int characterPopupDelay = 50;
+    public float characterPopupDelay = 0.1f;
     private bool finishedText;
+    private bool skipText;
     [SerializeField] ButtonScript BS;
     [SerializeField] string firstMessage;
     [SerializeField] string secondMessage;
@@ -30,49 +30,62 @@ public class TextBox : MonoBehaviour
         startMessages();
     }
 
-    private async void startMessages()
-    {
-        await Task.Delay(80);
-        popUp(firstMessage);
-        popUp(secondMessage);
-        popUp(thirdMessage);
-        popUp(fourthMessage);
-        popUp(fithMessage);
-        popUp(sixthMessage);
-        popUp(lastMessage);
+    private void Update() {
+        if (!finishedText) {if(Input.GetKeyDown(KeyCode.Mouse0)) {skipText = true;}}
     }
 
-    public async void popUp(string message)
+    private async void startMessages()
     {
-        while (!BS.readyToStart()) {await Task.Yield();}
-        while (!finishedText) {await Task.Yield();}
-        finishedText = false;
+        while(!BS.readyToStart()) {await Task.Yield();}
+        StartCoroutine("popUp", firstMessage);
+        while(!finishedText) {await Task.Yield();}
         gameObject.SetActive(true);
-        await DisplayText(message);
-        await waitForKeyPress(KeyCode.Mouse0);
+        StartCoroutine("popUp", secondMessage);
+        while(!finishedText) {await Task.Yield();}
+        gameObject.SetActive(true);
+        StartCoroutine("popUp", thirdMessage);
+        while(!finishedText) {await Task.Yield();}
+        gameObject.SetActive(true);
+        StartCoroutine("popUp", fourthMessage);
+        while(!finishedText) {await Task.Yield();}
+        gameObject.SetActive(true);
+        StartCoroutine("popUp", fithMessage);
+        while(!finishedText) {await Task.Yield();}
+        gameObject.SetActive(true);
+        StartCoroutine("popUp", sixthMessage);
+        while(!finishedText) {await Task.Yield();}
+        gameObject.SetActive(true);
+        StartCoroutine("popUp", lastMessage);
+    }
+
+    public IEnumerator popUp(string message)
+    {
+        finishedText = false;
+        skipText = false;
+        gameObject.SetActive(true);
+        yield return StartCoroutine("DisplayText", message);
+        yield return StartCoroutine("waitForKeyPress", KeyCode.Mouse0);
         if (message == lastMessage) { SL.LoadNextScene();}
         gameObject.SetActive(false);
         finishedText = true;       
     }
 
-    private async Task DisplayText(string message)
+    private IEnumerator DisplayText(string message)
     {
         TM.text = "";
-        string displayText = "";
         int alphaIndex = 0;
 
         foreach(char c in message.ToCharArray())
         {
+            if((skipText) && (alphaIndex < message.ToCharArray().Length  - 5)) {TM.text = message; break;}
             alphaIndex++;
-            TM.text = message;
-            displayText = TM.text.Insert(alphaIndex, kalphaCode);
-            TM.text = displayText;
-            await Task.Delay(characterPopupDelay);
+            TM.text = message.Substring(0, alphaIndex);
+            yield return new WaitForSecondsRealtime(characterPopupDelay);
         }
-        return;
+        yield return null;
     }
 
-    private async Task waitForKeyPress(KeyCode key)
+    private IEnumerator waitForKeyPress(KeyCode key)
     {
         bool done = false;
         while(!done) // essentially a "while true", but with a bool to break out naturally
@@ -81,9 +94,9 @@ public class TextBox : MonoBehaviour
             {
                 done = true; // breaks the loop
             }
-            await Task.Yield(); // wait until next frame, then continue execution from here (loop continues)
+            yield return 0; // wait until next frame, then continue execution from here (loop continues)
         }
-        return;
+        yield return null;
         // now this function returns
     }
 }

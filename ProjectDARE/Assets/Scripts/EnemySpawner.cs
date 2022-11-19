@@ -13,7 +13,8 @@ public class EnemySpawner : MonoBehaviour
     public async Task<bool> SpawnEnemy(float spawnRadius, int totalEnemies, float spawnIntervalmin, float spawnIntervalmax)
     {
         float spawnInterval;
-        Vector2 spawnPosition = candy.transform.position; 
+        Vector2 spawnPosition = candy.transform.position;
+        float timeBefore;
         for (int i = 0; i < totalEnemies; ++i)
         {
             spawnPosition = candy.transform.position;
@@ -21,7 +22,8 @@ public class EnemySpawner : MonoBehaviour
             Instantiate(enemy, spawnPosition, Quaternion.identity);
             gameController.addToEnemies(1);
             spawnInterval = Random.Range(spawnIntervalmin, spawnIntervalmax);
-            await Task.Delay((int)(spawnInterval * 1000));
+            timeBefore = 0f;
+            while (timeBefore < spawnInterval) {timeBefore += Time.deltaTime; await Task.Yield();}
         }
         return true;
     }
